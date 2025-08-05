@@ -871,15 +871,14 @@ public:
      * @return - &l:DocumentInfo::Builder;.
      */
     Builder& setExternalDocsForTag(const oatpp::String& tagName, const oatpp::String& url, const oatpp::String& description ) {
-      auto externalDocs = ExternalDocumentation::createShared();
-      externalDocs->url = url;
-      externalDocs->description = description;
 
       for (auto tag : *getTags())
       {
         if (tag->name == tagName)
         {
-          tag->externalDocs = externalDocs;
+          tag->externalDocs = ExternalDocumentation::createShared();
+          tag->externalDocs->url = url;
+          tag->externalDocs->description = description;
           break;
         }
       }
